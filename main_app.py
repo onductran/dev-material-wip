@@ -6,7 +6,10 @@ st.set_page_config(
     initial_sidebar_state="auto"
 )
 
+# --- Functions to display different sections of the app ---
+
 def show_authenticated_content():
+    """Displays content visible only to logged-in users."""
     st.title("Welcome to the Authenticated App!")
     st.write(f"Hello, **{st.user.name}**!") # Access user's name from Auth0
     st.write(f"Your email: `{st.user.email}`") # Access user's email
@@ -21,24 +24,38 @@ def show_authenticated_content():
     st.json(st.user) # Displays all available user information from Auth0
 
     st.markdown("---")
-    st.write("This content is only visible to logged-in users.")
+    st.write("This is the main content of your application, only visible to logged-in users.")
 
+    # Logout button for authenticated users
     st.sidebar.button("Logout", on_click=st.logout)
 
-# Main app logic
-st.sidebar.title("Authentication")
+def show_public_content():
+    """Displays content visible to all users (before login)."""
+    st.title("Welcome to the Public App!")
+    st.info("Please log in to access the full application features.")
 
-# Check if the user is already logged in
+    # Login button for unauthenticated users
+    # When this button is clicked, st.login() is called, which initiates the redirect.
+    # st.stop() is crucial here to prevent the rest of the script from running
+    # until the user returns from the Auth0 login page.
+    if st.button("Login with Auth0"):
+        st.login(args=["auth0"]) # "auth0" matches the provider name in your secrets.toml
+        st.stop() # Stop script execution and redirect
+
+    st.markdown("---")
+    st.write("This content is visible to everyone.")
+
+
+# --- Main Application Logic ---
+
+st.sidebar.title("Authentication Status")
+
+# Check if the user is currently logged in
+# st.session_state["user"] is populated by Streamlit's OIDC mechanism
+# st.user.is_logged_in is the primary way to check the login status
 if st.session_state.get("user") and st.session_state["user"].is_logged_in:
+    # If authenticated, show the content for logged-in users
     show_authenticated_content()
 else:
-    st.info("Please log in to access the application.")
-    # Show login button, explicitly specifying the provider name from secrets.toml
-    if not st.user.is_logged_in:
-        st.button("Login with Auth0", on_click=st.login, args=["auth0"])
-        st.stop()
-    st.title("Welcome to the Public App!")
-    st.write("This content is visible to everyone (post-login).")
-    st.button("Log out", on_click=st.logout)
-st.markdown("---")
-st.write("This content is visible to everyone (pre-login).")
+    # If not authenticated, show the public content and login prompt
+    show_public_content()
