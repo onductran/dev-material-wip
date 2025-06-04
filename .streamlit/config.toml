@@ -3,6 +3,4 @@ enableStaticServing = true
 
 [[theme.fontFaces]]
 family = On Diatype
-url = “assets/OnDiatypeStd-Regular.otf”
-weight = 400
-style = “normal”
+url = "assets/OnDiatypeStd-Regular.otf"
