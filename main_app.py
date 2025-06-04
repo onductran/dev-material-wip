@@ -39,6 +39,6 @@ else:
         st.stop()
     st.title("Welcome to the Public App!")
     st.write("This content is visible to everyone (post-login).")
-
-    st.markdown("---")
-    st.write("This content is visible to everyone (pre-login).")
+    st.button("Log out", on_click=st.logout)
+st.markdown("---")
+st.write("This content is visible to everyone (pre-login).")
