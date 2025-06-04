@@ -38,8 +38,9 @@ def show_public_content():
     # When this button is clicked, st.login() is called, which initiates the redirect.
     # st.stop() is crucial here to prevent the rest of the script from running
     # until the user returns from the Auth0 login page.
-    st.button("Login", on_click=st.login, args=["auth0"])
-    st.stop() # Stop script execution and redirect
+    if st.button("Login with Auth0"):
+        st.login("auth0") # "auth0" matches the provider name in your secrets.toml
+        st.stop() # Stop script execution and redirect
 
     st.markdown("---")
     st.write("This content is visible to everyone.")
