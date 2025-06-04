@@ -35,7 +35,7 @@ else:
     st.info("Please log in to access the application.")
     # Show login button, explicitly specifying the provider name from secrets.toml
     if st.button("Login with Auth0"):
-        st.login("auth0") # The key "auth0" matches [auth.auth0] in secrets.toml
+        st.login(st.secrets["auth0"]) # The key "auth0" matches [auth.auth0] in secrets.toml
 
     st.markdown("---")
     st.write("This content is visible to everyone (pre-login).")
