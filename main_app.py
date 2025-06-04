@@ -34,7 +34,7 @@ if st.session_state.get("user") and st.session_state["user"].is_logged_in:
 else:
     st.info("Please log in to access the application.")
     # Show login button, explicitly specifying the provider name from secrets.toml
-    if st.button("Login with Auth0"):
+    if st.button("Login"):
         st.login(st.secrets["auth.auth0"]) # The key "auth0" matches [auth.auth0] in secrets.toml
 
     st.markdown("---")
