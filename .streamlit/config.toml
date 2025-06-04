@@ -1,6 +1,9 @@
 [server]
-enableStaticServing = true
+enableStaticServing=true
 
 [[theme.fontFaces]]
-family = "On Diatype"
-url = "app/assets"
+family="OnDiatypeStandard"
+url="app/static/OnDiatypeStd-Regular.otf"
+
+[theme]
+font="OnDiatypeStandard"
