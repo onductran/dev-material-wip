@@ -34,8 +34,11 @@ if st.session_state.get("user") and st.session_state["user"].is_logged_in:
 else:
     st.info("Please log in to access the application.")
     # Show login button, explicitly specifying the provider name from secrets.toml
-    if st.button("Login"):
-        st.login("auth0") # The key "auth0" matches [auth.auth0] in secrets.toml
+    if not st.user.is_logged_in:
+        st.button("Login with Auth0", on_click=st.login, args=("auth0",))
+        st.stop()
+    st.title("Welcome to the Public App!")
+    st.write("This content is visible to everyone (post-login).")
 
     st.markdown("---")
     st.write("This content is visible to everyone (pre-login).")
