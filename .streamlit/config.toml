@@ -2,5 +2,5 @@
 enableStaticServing = true
 
 [[theme.fontFaces]]
-family = On Diatype
-url = "assets/OnDiatypeStd-Regular.otf"
+family = "On Diatype"
+url = "app/assets"
