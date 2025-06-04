@@ -53,7 +53,7 @@ st.sidebar.title("Authentication Status")
 # Check if the user is currently logged in
 # st.session_state["user"] is populated by Streamlit's OIDC mechanism
 # st.user.is_logged_in is the primary way to check the login status
-if st.session_state.get("user") and st.session_state["user"].is_logged_in:
+if st.user.is_logged_in:
     # If authenticated, show the content for logged-in users
     show_authenticated_content()
 else:
