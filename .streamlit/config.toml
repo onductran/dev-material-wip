@@ -1,9 +1,11 @@
 [server]
 enableStaticServing=true
 
-[[theme.fontFaces]]
-family="OnDiatypeStandard"
-url="app/static/OnDiatypeStd-Regular.otf"
+ [[theme.fontFaces]]
+ family="OnDiaType"
+ url="app/static/OnDiatypeStd-Regular.otf"
+ style="normal"
+ weight=400
 
 [theme]
-font="OnDiatypeStandard"
+font="OnDiaType"

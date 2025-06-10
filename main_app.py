@@ -1,4 +1,5 @@
 import streamlit as st
+from data_editor import load_data, display_data
 
 st.set_page_config(
     page_title="Auth0 Streamlit App",
@@ -14,17 +15,12 @@ def show_authenticated_content():
     st.write(f"Hello, **{st.user.name}**!") # Access user's name from Auth0
     st.write(f"Your email: `{st.user.email}`") # Access user's email
 
-    # You can access other claims from the OIDC token if configured in Auth0
-    # For example, if you add custom claims or roles to your Auth0 tokens,
-    # you can often access them like:
-    # st.write(f"Your role: {st.user.get('https://your-namespace/role', 'N/A')}")
-    # Note: Custom claims require configuration in Auth0 Rules/Actions to be included in the ID token.
-
-    st.subheader("Raw User Info:")
-    st.json(st.user) # Displays all available user information from Auth0
-
     st.markdown("---")
-    st.write("This is the main content of your application, only visible to logged-in users.")
+    st.header("Data Editor")
+    data = load_data("1. APP PLACEMENTS - TEXTILE.xlsx")  # Load sample data
+    edited_data = display_data(data)  # Display the data editor
+    st.dataframe(edited_data, use_container_width=True)  # Show the edited data
+    st.markdown("---")
 
     # Logout button for authenticated users
     st.sidebar.button("Logout", on_click=st.logout)
